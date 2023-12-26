@@ -5,12 +5,20 @@ import Footer from "components/footer/FooterAdmin.js";
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import { SidebarContext } from "contexts/SidebarContext";
-import React, { useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Redirect, Route, Switch  ,useHistory } from "react-router-dom";
 import routes from "routes.js";
 
 // Custom Chakra theme
 export default function Dashboard(props) {
+  const access = localStorage.getItem('accessToken')
+  const history = useHistory()
+  if(!access){
+    history.push("/auth")
+  }
+  useEffect(() => {
+     
+  }, []);
   const { ...rest } = props;
   // states and functions
   const [fixed] = useState(false);

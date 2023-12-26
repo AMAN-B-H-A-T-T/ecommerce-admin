@@ -1,11 +1,10 @@
 
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink , useHistory } from "react-router-dom";
 // Chakra imports
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
   FormControl,
   FormLabel,
@@ -18,6 +17,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
+
 import { HSeparator } from "components/separator/Separator";
 import DefaultAuth from "layouts/auth/Default";
 // Assets
@@ -25,9 +25,13 @@ import illustration from "assets/img/auth/login.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import axios from "axios";
+import base_url from "base_url";
+
 
 function SignIn() {
   // Chakra color mode
+  
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
@@ -45,6 +49,41 @@ function SignIn() {
   );
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+
+    // handel the user login module here
+    const history = useHistory();
+    const [UserEmail, setUserEmail] = useState("");
+    const [UserPassword, setUserPassword] = useState("");
+
+    const handleOnSubmitForLogin = (e)=>{
+      e.preventDefault()
+      console.log(UserEmail);
+      console.log(UserPassword);
+      const body = {
+        'userEmail':UserEmail,
+        'userPassword':UserPassword
+      }
+      const header = {
+        'Content-Type':'application/json'
+      }
+      try{
+        axios.post(`${base_url}api/user/userLogin/`,body,{headers:header})
+        .then((response)=>{
+          console.log(response.data.data);
+          localStorage.setItem('accessToken',response.data.data)
+          history.push('/admin')
+        })
+        .catch((error)=>{
+          console.log("erroe");
+          console.log(error);
+        })
+      }
+      catch(error){
+        console.log("error");
+        console.log(error);
+      }
+    }
+
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
@@ -125,6 +164,7 @@ function SignIn() {
               mb='24px'
               fontWeight='500'
               size='lg'
+              onChange={(e)=>{setUserEmail(e.target.value)}}
             />
             <FormLabel
               ms='4px'
@@ -143,7 +183,7 @@ function SignIn() {
                 size='lg'
                 type={show ? "text" : "password"}
                 variant='auth'
-                
+                onChange={(e)=>{setUserPassword(e.target.value)}}
               />
               <InputRightElement display='flex' alignItems='center' mt='4px'>
                 <Icon
@@ -171,7 +211,9 @@ function SignIn() {
               fontWeight='500'
               w='100%'
               h='50'
-              mb='24px'>
+              mb='24px'
+              onClick={(e)=>{handleOnSubmitForLogin(e)}}
+              >
               Sign In
             </Button>
           </FormControl>
