@@ -1,74 +1,158 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Chakra imports
-import { Button, Flex, Link, Text } from "@chakra-ui/react";
+import { Button, Flex, Link, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, useColorModeValue, Grid, Textarea, Select } from "@chakra-ui/react";
 
-// Assets
-import banner from "assets/img/nfts/NftBanner1.png";
 
 export default function Banner() {
   // Chakra Color Mode
+  
+  const [ProductName, setProductName] = useState("");
+  const [ProductCategory, setProductCategory] = useState("");
+  const [ProductQuentity, setProductQuentity] = useState("");
+  const [ProductPrice, setProductPrice] = useState("");
+  const [ProductDescription, setProductDescription] = useState("");
+  const [ProductImage, setProductImage] = useState(null);
+  const textColor = useColorModeValue("secondaryGray.900", "white");
   return (
     <Flex
       direction='column'
-      bgImage={banner}
+      bgColor={'#ffffff'}
       bgSize='cover'
-      py={{ base: "30px", md: "56px" }}
-      px={{ base: "30px", md: "64px" }}
-      borderRadius='30px'>
-      <Text
-        fontSize={{ base: "24px", md: "34px" }}
-        color='white'
-        mb='14px'
-        maxW={{
-          base: "100%",
-          md: "64%",
-          lg: "46%",
-          xl: "70%",
-          "2xl": "50%",
-          "3xl": "42%",
-        }}
-        fontWeight='700'
-        lineHeight={{ base: "32px", md: "42px" }}>
-        Discover, collect, and sell extraordinary NFTs
-      </Text>
-      <Text
-        fontSize='md'
-        color='#E3DAFF'
-        maxW={{
-          base: "100%",
-          md: "64%",
-          lg: "40%",
-          xl: "56%",
-          "2xl": "46%",
-          "3xl": "34%",
-        }}
-        fontWeight='500'
-        mb='40px'
-        lineHeight='28px'>
-        Enter in this creative world. Discover now the latest NFTs or start
-        creating your own!
-      </Text>
-      <Flex align='center'>
-        <Button
-          bg='white'
-          color='black'
-          _hover={{ bg: "whiteAlpha.900" }}
-          _active={{ bg: "white" }}
-          _focus={{ bg: "white" }}
-          fontWeight='500'
-          fontSize='14px'
-          py='20px'
-          px='27'
-          me='38px'>
-          Discover now
-        </Button>
-        <Link>
-          <Text color='white' fontSize='sm' fontWeight='500'>
-            Watch video
-          </Text>
-        </Link>
+      marginBottom={'20px'}
+      >
+      <Flex flexDirection='row' bgColor={'#F7FAFC'}>
+        <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700' padding={'10px'}>
+          Add Product Details
+        </Text>
       </Flex>
+      <Grid templateColumns='repeat(2, 1fr)' gap={6} paddingTop={'20px'} padding={'20px'}>
+        <FormControl>
+          <FormLabel
+           ms='4px'
+           fontSize='sm'
+           fontWeight='500'
+           color={textColor}
+           mb='8px'
+          >
+            Product Name
+          </FormLabel>
+          <Input type="Text"
+          isRequired={true}
+          variant='auth'
+          fontSize='sm'
+          ms={{ base: "0px", md: "0px" }}
+          placeholder='Product Name'
+          mb='24px'
+          fontWeight='500'
+          size='lg'
+          ></Input>
+        </FormControl>
+        <FormControl>
+          <FormLabel
+          ms='4px'
+          fontSize='sm'
+          fontWeight='500'
+          color={textColor}
+          mb='8px'
+          >
+            Product Category
+          </FormLabel>
+          <Select placeholder="Select Product Category">
+          <option value='option1'>Option 1</option>
+          <option value='option2'>Option 2</option>
+          <option value='option3'>Option 3</option>
+          </Select>
+        </FormControl>
+        <FormControl>
+          <FormLabel
+            ms='4px'
+            fontSize='sm'
+            fontWeight='500'
+            color={textColor}
+            mb='8px'
+          >
+            Base Price
+          </FormLabel>
+          <Input type="number"
+          isRequired={true}
+          variant='auth'
+          fontSize='sm'
+          ms={{ base: "0px", md: "0px" }}
+          placeholder='Product Price'
+          mb='24px'
+          fontWeight='500'
+          size='lg'
+          ></Input>
+        </FormControl>
+        <FormControl>
+          <FormLabel
+            ms='4px'
+            fontSize='sm'
+            fontWeight='500'
+            color={textColor}
+            mb='8px'
+          >
+            Quentity
+          </FormLabel>
+          <Input type="number"
+            isRequired={true}
+            variant='auth'
+            fontSize='sm'
+            ms={{ base: "0px", md: "0px" }}
+            placeholder='Product Quentity'
+            mb='24px'
+            fontWeight='500'
+            size='lg'
+          ></Input>
+        </FormControl>
+        <FormControl>
+          <FormLabel
+            ms='4px'
+            fontSize='sm'
+            fontWeight='500'
+            color={textColor}
+            mb='8px'
+          >
+            Product Picture
+          </FormLabel>
+          <Input type="file" padding={'5px'}
+            isRequired={true}
+            variant='auth'
+            fontSize='sm'
+            ms={{ base: "0px", md: "0px" }}
+            placeholder='Product Picture'
+            mb='24px'
+            fontWeight='500'
+            size='lg'
+          ></Input>
+        </FormControl>
+        <FormControl>
+          <FormLabel
+            ms='4px'
+            fontSize='sm'
+            fontWeight='500'
+            color={textColor}
+            mb='8px'
+          >
+            Product Description
+          </FormLabel>
+          <Textarea
+          isRequired={true}
+          
+          ></Textarea>
+        </FormControl>
+      </Grid>
+      
+      <Button
+       mb='20px'
+       marginLeft={'20px'}
+       marginRight={'20px'}
+       mt={{ base: "20px", "2xl": "auto" }}
+       variant='brand'
+       fontWeight='500'
+      >Add Product</Button>
+      
     </Flex>
   );
 }

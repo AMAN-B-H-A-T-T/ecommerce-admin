@@ -11,6 +11,7 @@ import { FaChevronLeft } from "react-icons/fa";
 function AuthIllustration(props) {
   const { children, illustrationBackground } = props;
   // Chakra color mode
+  console.log("login default");
   return (
     <Flex position='relative' h='max-content'>
       <Flex

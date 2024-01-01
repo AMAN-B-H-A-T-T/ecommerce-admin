@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink , useHistory } from "react-router-dom";
 // Chakra imports
 import {
@@ -34,7 +34,7 @@ function SignIn() {
   
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
-  const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
+  
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
@@ -47,6 +47,7 @@ function SignIn() {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
+  console.log("login");
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
@@ -54,7 +55,9 @@ function SignIn() {
     const history = useHistory();
     const [UserEmail, setUserEmail] = useState("");
     const [UserPassword, setUserPassword] = useState("");
-
+    useEffect(() => {
+      console.log("object222");
+    }, []);
     const handleOnSubmitForLogin = (e)=>{
       e.preventDefault()
       console.log(UserEmail);
@@ -67,7 +70,7 @@ function SignIn() {
         'Content-Type':'application/json'
       }
       try{
-        axios.post(`${base_url}api/user/userLogin/`,body,{headers:header})
+        axios.post(`${base_url}api/user/userLogin`,body,{headers:header})
         .then((response)=>{
           console.log(response.data.data);
           localStorage.setItem('accessToken',response.data.data)
@@ -83,7 +86,7 @@ function SignIn() {
         console.log(error);
       }
     }
-
+   
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex

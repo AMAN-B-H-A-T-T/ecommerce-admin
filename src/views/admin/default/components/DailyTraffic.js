@@ -24,15 +24,15 @@ export default function DailyTraffic(props) {
       <Flex justify='space-between' align='start' px='10px' pt='5px'>
         <Flex flexDirection='column' align='start' me='20px'>
           <Flex w='100%'>
-            <Text
-              me='auto'
-              color='secondaryGray.600'
-              fontSize='sm'
-              fontWeight='500'>
-              Daily Traffic
-            </Text>
+          <Text
+          color={textColor}
+          fontSize='22px'
+          fontWeight='700'
+          lineHeight='100%'>
+          Daily Orders
+        </Text>
           </Flex>
-          <Flex align='end'>
+          <Flex align='end' marginTop={'10px'}>
             <Text
               color={textColor}
               fontSize='34px'
@@ -45,7 +45,7 @@ export default function DailyTraffic(props) {
               color='secondaryGray.600'
               fontSize='sm'
               fontWeight='500'>
-              Visitors
+              Orders
             </Text>
           </Flex>
         </Flex>
