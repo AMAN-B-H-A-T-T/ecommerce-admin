@@ -1,11 +1,9 @@
-// Chakra imports
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import Footer from "components/footer/FooterAdmin.js";
-// Layout components
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import { SidebarContext } from "contexts/SidebarContext";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Redirect, Route, Switch  ,useHistory } from "react-router-dom";
 import routes from "routes.js";
 
@@ -14,16 +12,14 @@ export default function Dashboard(props) {
   const access = localStorage.getItem('accessToken')
   const history = useHistory()
   if(!access){
-    history.push("/auth")
-  }
-  useEffect(() => {
-     
-  }, []);
+      history.push("/auth")
+    }   
+  // useEffect(() => {
+  //   
+  // }, [access]);
   const { ...rest } = props;
-  // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  // functions for changing the states from components
   const getRoute = () => {
     return window.location.pathname !== "/admin/full-screen-maps";
   };

@@ -39,6 +39,7 @@ export default function Auth() {
   };
   const authBg = useColorModeValue("white", "navy.900");
   document.documentElement.dir = "ltr";
+  console.log("login layout");
   return (
     <Box>
       <SidebarContext.Provider
@@ -57,14 +58,14 @@ export default function Auth() {
           transitionDuration='.2s, .2s, .35s'
           transitionProperty='top, bottom, width'
           transitionTimingFunction='linear, linear, ease'>
-          {getRoute() ? (
+          {getRoute() ? ( 
             <Box mx='auto' minH='100vh'>
               <Switch>
+                {console.log("object333")}
                 {getRoutes(routes)}
                 <Redirect
                   from='/auth'
-                  to='/auth/sign-in/default
-                  '
+                  to='/auth/sign-in/default'
                 />
               </Switch>
             </Box>
