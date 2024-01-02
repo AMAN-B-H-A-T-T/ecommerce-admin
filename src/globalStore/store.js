@@ -6,22 +6,30 @@ export const Store = createContext()
 const initialState = {
     accessToken: localStorage.getItem('accessToken')
     ? localStorage.getItem('accessToken')
-    :null
+    :null,
+    category_list_global : []
 }
 
 function reducer(state,action){
     switch(action.type){
         case 'ACCESS_TOKEN':
             return {...state,accessToken:action.payload}
+        case 'SET_CATEGORY_LIST':
+            return {...state,category_list_global:action.payload}
         default:
             return state
     }
 }
-export function StoreProvider(props){
-    const [state,dispactch] = useReducer(reducer,initialState)
-    const value = {state,dispactch}
-    return <Store.Provider value={value}>{props.children}</Store.Provider>
+
+
+export function StoreProvider(props) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const value = { state, dispatch };
+
+  return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }
-StoreProvider.prototype = {
-    children: PropTypes.node.isRequired
-}
+
+// Add propTypes validation
+StoreProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};

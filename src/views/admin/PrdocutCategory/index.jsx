@@ -98,12 +98,10 @@ const Index = () => {
                                     fontSize='22px'
                                     fontWeight='700'
                                     lineHeight='100%'>
-                                    Check Table
+                                    Category List
                                 </Text>
                             </Flex>
                             <Flex justify={'center'}>
-
-
                                 <Table>
                                     <Thead>
                                         <Tr>
