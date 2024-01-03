@@ -7,7 +7,8 @@ const initialState = {
     accessToken: localStorage.getItem('accessToken')
     ? localStorage.getItem('accessToken')
     :null,
-    category_list_global : []
+    category_list_global : [],
+    user_details:{}
 }
 
 function reducer(state,action){
@@ -16,6 +17,8 @@ function reducer(state,action){
             return {...state,accessToken:action.payload}
         case 'SET_CATEGORY_LIST':
             return {...state,category_list_global:action.payload}
+        case 'SET_USER_DETAILS':
+            return {...state,user_details:action.payload}
         default:
             return state
     }
