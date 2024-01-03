@@ -3,26 +3,37 @@ import Footer from "components/footer/FooterAdmin.js";
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import { SidebarContext } from "contexts/SidebarContext";
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import { Redirect, Route, Switch  ,useHistory } from "react-router-dom";
 import routes from "routes.js";
+import { jwtDecode } from "jwt-decode";
+import { Store } from "globalStore/store";
 
 // Custom Chakra theme
 export default function Dashboard(props) {
   const access = localStorage.getItem('accessToken')
   const history = useHistory()
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const {user_details} = state
   if(!access){
       history.push("/auth")
     }   
-  // useEffect(() => {
-  //   
-  // }, [access]);
+  const decode_token = async()=>{
+      const decode = jwtDecode(access)
+      ctxDispatch({ type: 'SET_USER_DETAILS', payload: decode})
+  }
+  useEffect(() => {
+      decode_token()
+  }, [access]);
   const { ...rest } = props;
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const getRoute = () => {
     return window.location.pathname !== "/admin/full-screen-maps";
   };
+  <a/
+   
+  >
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
